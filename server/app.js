@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000
 exports.app = app
 
 
-require("./middlewares/middleware");
+require("./middlewares/global.middleware");
 
 
 app.use(router)
