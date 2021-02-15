@@ -1,10 +1,18 @@
+import React from "react";
+import { Navbar, Footer } from "./components";
+import { Switch, Route } from "react-router-dom";
+import "./index.scss";
 
-function App() {
+const App = () => {
   return (
-    <div>
-     
-    </div>
+    <>
+      <Navbar />
+      <Switch>
+        <Route to="/"></Route>
+      </Switch>
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;
