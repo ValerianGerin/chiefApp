@@ -5,7 +5,7 @@ const { findUserPerID } = require("../queries/user.query");
 /*Function used on protected routes too check if token and token is valid and create a 
 user key on req that container the user info since the decodedToken contain the userID*/
 exports.isAuthenticate = async (req, res, next) => {
-  const token = req.headers.autorization;
+  const token = req.headers.authorization;
 
   if (token) {
     try {
