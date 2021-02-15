@@ -1,9 +1,34 @@
-body {
+//Generals
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   letter-spacing: 2px;
 }
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+:root {
+  --font-family: "Roboto", sans-serif;
+  --primary: #546de5;
+  --secondary: #778beb;
+  --accent: #e5546d;
+  --lightgray: #ddd;
+  --text-regular: #444;
+}
+
+
 
 /////////////UTILS FLEX//////////////
 .d-flex {
@@ -239,3 +264,20 @@ body {
 .mb-20 {
   margin-bottom: 20px;
 }
+
+
+//Debug helpers
+
+.d1 {
+  border: 1px solid red;
+}
+
+.d2 {
+  border: 1px solid black;
+}
+
+.d3{
+  border: 1px solid blue;
+}
+
+
