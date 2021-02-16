@@ -13,8 +13,8 @@ const App = () => {
 
   const login = () => {
     const token = localStorage.getItem("authorization");
-    const user = JSON.parse(window.atob(token.split(".")[1]));
-    setLoggedStatus({ isLogged: true, token: token, user: user });
+    //const user = JSON.parse(window.atob(token.split(".")[1]));
+    setLoggedStatus({ isLogged: true, token: token});
   };
 
   const logout = () => {
