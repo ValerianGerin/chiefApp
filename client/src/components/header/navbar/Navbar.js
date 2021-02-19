@@ -28,12 +28,13 @@ const Navbar = () => {
           <>
             <li>
               <Link to="/profil">
-                <VscAccount size={45}></VscAccount>
+              <VscAccount></VscAccount>
+              <p>Profil</p>
               </Link>
             </li>
             <li>
               <Link to="/">
-                <AiOutlineLogout size={45} onClick={logout}></AiOutlineLogout>
+                <AiOutlineLogout onClick={logout}></AiOutlineLogout>
               </Link>
             </li>
           </>
