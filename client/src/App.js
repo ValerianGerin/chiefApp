@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { Navbar, Footer, Homepage } from "./components";
 import { Switch, Route } from "react-router-dom";
+
+import { Navbar, Footer, Homepage } from "./components";
+import {
+  PolicyOfUseOfData,
+  TermsOfServices,
+  LegalNotice,
+} from "./components/footer/footer-pages";
 import { AuthProvider } from "./context/AuthContext";
+
 import "./index.scss";
 
 const App = () => {
@@ -27,9 +34,20 @@ const App = () => {
       <AuthProvider value={{ loggedStatus, login, logout }}>
         <Navbar />
         <Switch>
-          <main>
-            <Route to="/" component={Homepage}></Route>
-          </main>
+          <>
+            <main>
+              <Route exact path="/" component={Homepage}></Route>
+              <Route
+                path="/policy of use of personal data"
+                component={PolicyOfUseOfData}
+              ></Route>
+              <Route path="/legal notice" component={LegalNotice}></Route>
+              <Route
+                path="/terms of service"
+                component={TermsOfServices}
+              ></Route>
+            </main>
+          </>
         </Switch>
         <Footer />
       </AuthProvider>
