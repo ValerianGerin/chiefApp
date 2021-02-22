@@ -1,0 +1,26 @@
+@import "../../../index.scss";
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: var(--primary);
+  flex-wrap: wrap;
+  padding: 4%;
+  font-size: 1.6vw;
+  div {
+    padding: 1%;
+  }
+  div:first-child {
+    p {
+      padding: 1%;
+
+    }
+  }
+  div:last-child {
+    p {
+      padding: 1%;
+    }
+  }
+}
