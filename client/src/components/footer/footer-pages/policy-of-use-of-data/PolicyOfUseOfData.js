@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./PolicyOfUseOfData.module.scss";
 
-const PolicyOfUseOfData = (props) => {
-  console.log(props);
+const PolicyOfUseOfData = () => {
+
   return (
     <div className={style.container}>
       <section>
