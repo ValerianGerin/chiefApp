@@ -8,10 +8,9 @@
   --text-regular: #444;
   --main-transition: all 0.7s ease-out;
   --second-transition: all 0.4s ease-out;
-  --min-content: calc( 100vh - 298px);
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -19,12 +18,10 @@
   font-family: var(--main-font);
 }
 
-body{
+body {
   position: relative;
 }
-
-main{
-  min-height: var(--min-content);
+main {
   padding-top: 7px;
 }
 
@@ -32,16 +29,11 @@ ul {
   list-style: none;
 }
 
-
 a {
   text-decoration: none;
   color: inherit;
 }
 
-input{
+input {
   outline: none;
 }
-
-
-
-
