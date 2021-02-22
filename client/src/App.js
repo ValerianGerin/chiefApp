@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { Navbar, Footer, Homepage } from "./components";
 import {
+  Navbar,
+  Footer,
+  Homepage,
   PolicyOfUseOfData,
   TermsOfServices,
   LegalNotice,
-} from "./components/footer/footer-pages";
+  Register,
+  Login,
+  AddRecipe,
+} from "./components";
+
 import { AuthProvider } from "./context/AuthContext";
 
 import "./index.scss";
@@ -45,6 +51,10 @@ const App = () => {
               <Route
                 path="/terms of service"
                 component={TermsOfServices}
+              ></Route>
+              <Route
+                path="/register"
+                render={()=><Register/>}
               ></Route>
             </main>
           </>
