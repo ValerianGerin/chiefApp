@@ -1,8 +1,6 @@
 import React from "react";
 import style from "./TermsOfServices.module.scss";
 
-
-
 const TermsOfServices = () => {
   return (
     <div className={style.container}>
