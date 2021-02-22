@@ -1,0 +1,125 @@
+@import "../../index.scss";
+
+section:first-child {
+  height: 40vw;
+  .backgroundimg {
+    position: relative;
+    height: 100%;
+    background: url(./../../assets/img/backgroundInputHomepage.jpg) no-repeat
+      center;
+    background-size: cover;
+  }
+  h1 {
+    position: absolute;
+    top: 50%;
+    left: 22%;
+    color: white;
+    font-size: 3vw;
+  }
+}
+
+section:nth-child(2) {
+  position: relative;
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  img {
+    width: 40%;
+    height: 40%;
+    min-width: 120px;
+    min-height: 120px;
+    border-radius: 5px;
+  }
+  p {
+    margin-top: 3%;
+    font-size: 2vw;
+  }
+}
+
+section:nth-child(3) {
+  height: 90vh;
+  div {
+    height: 100%;
+    background: url(../../assets/img/backougoundArticle1.jpg) no-repeat center;
+    background-size: cover;
+    position: relative;
+  }
+  article {
+    opacity: 0.9;
+    box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+
+    font-size: 2vw;
+    width: 80%;
+    height: 15%;
+  }
+  article:first-child {
+    position: absolute;
+    top: 2%;
+    left: 0;
+    background-color: #575fcf;
+    border-radius: 0 8px 8px 0;
+  }
+  article:nth-child(2) {
+    position: absolute;
+    top: 35%;
+    right: 0;
+    background-color: #ffc048;
+    border-radius: 8px 0 0 8px;
+  }
+  article:last-child {
+    position: absolute;
+    bottom: 2%;
+    left: 0;
+    background-color: #f53b57;
+    border-radius: 0 8px 8px 0;
+  }
+}
+
+section:nth-child(4) {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2%;
+  article {
+    min-width: 250px;
+    width: 20%;
+    height: 270px;
+    margin: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+    font-weight: 700;
+    color: white;
+    p{
+      background: rgba(51, 51, 51, 0.5);
+      padding: 5%;
+      border-radius: 5px;
+      transition: var(--main-transition);
+      cursor: pointer;
+      &:hover{
+        background: rgba(51, 51, 51, 0.8);;
+      }
+    }
+  }
+  article:first-child {
+    background: url(../../assets/img/homepageCard1.jpg) no-repeat center;
+    background-size: cover;
+  }
+  article:nth-child(2){
+    background: url(../../assets/img/homepageCard2.jpeg) no-repeat center;
+    background-size: cover;
+  }
+  article:last-child{
+    background: url(../../assets/img/homepageCard3.jpg) no-repeat center;
+    background-size: cover;
+  }
+}
