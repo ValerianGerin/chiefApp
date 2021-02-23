@@ -13,8 +13,7 @@ exports.newUser = async (req, res) => {
 
     if (emailAlreadyExist) {
       //If it already exist can't create the user
-      res.status(409);
-      res.json("Cet email est deja utilisé");
+      res.status(409).end();
     } else {
       try {
         //Calling statics method on the model to hash the password
@@ -28,14 +27,16 @@ exports.newUser = async (req, res) => {
             password: hashedPassword,
           },
         });
-        res.status(201);
+        res.status(201).end();
         newUser.save();
+        
+        
       } catch (error) {
-        res.status(424);
-        res.end();
+        res.status(424).end();
+
         throw error;
       }
     }
   }
-  res.end();
+  res.status(400).end();
 };
