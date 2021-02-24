@@ -5,7 +5,7 @@
   top: 0;
   z-index: 1;
   background: white;
-  font-size: 2.2vw;
+  font-size: clamp(1rem, 2vw, 2rem);
   font-weight: bold;
   box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.2);
   min-width: 300px;
@@ -19,9 +19,10 @@
     li {
       width: 14%;
       height: 20%;
+      min-width: 75px;
     }
     li:first-child {
-      margin-right: 10%;
+      margin-right: 5%;
       img {
         max-width: 70%;
         max-height: 70%;
@@ -30,7 +31,8 @@
       }
     }
     li:not(:first-child) {
-      padding: 8px;
+      margin-right: 5%;
+      padding: 8px 8%;
       border-radius: 10px;
       transition: var(--main-transition);
       a {
