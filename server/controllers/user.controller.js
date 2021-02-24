@@ -29,8 +29,6 @@ exports.newUser = async (req, res) => {
         });
         res.status(201).end();
         newUser.save();
-        
-        
       } catch (error) {
         res.status(424).end();
 
@@ -38,5 +36,5 @@ exports.newUser = async (req, res) => {
       }
     }
   }
-  res.status(400).end();
+  res.status(500).end();
 };
