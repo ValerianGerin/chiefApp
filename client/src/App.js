@@ -24,10 +24,10 @@ const App = () => {
     user: null,
   });
 
-  const login = () => {
-    const token = localStorage.getItem("authorization");
-    //const user = JSON.parse(window.atob(token.split(".")[1]));
-    setLoggedStatus({ isLogged: true, token: token });
+  const login = (token) => {
+    localStorage.setItem("authorization", token);
+    const userFromToken = JSON.parse(window.atob(token.split(".")[1]));
+    setLoggedStatus({...loggedStatus,  isLogged: true, token: token, user: userFromToken });
   };
 
   const logout = () => {
@@ -54,7 +54,7 @@ const App = () => {
               ></Route>
               <Route
                 path="/register"
-                render={()=><Register/>}
+                render={(props) => <Register {...props} login={login}/>}
               ></Route>
             </main>
           </>
