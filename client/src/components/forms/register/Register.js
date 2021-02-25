@@ -6,7 +6,7 @@ import { MdVisibility } from "react-icons/md";
 
 import style from "./Register.module.scss";
 
-const Register = (props, { login }) => {
+const Register = (props) => {
   const initialStateForm = { name: "", email: "", password: "" };
 
   const [form, setForm] = useState(initialStateForm);
@@ -20,34 +20,54 @@ const Register = (props, { login }) => {
 
   const handleSubmit = (e) => {
     const body = { ...form };
+
     e.preventDefault();
-    try {
-      fetch("http://localhost:3000/user/new", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: { "Content-type": "application/json" },
-      }).then((res) => {
-        if (res.status === 400) {
-          setFormMessage("Format d'email invalide");
-        } else if (res.status === 409) {
-          setFormMessage("Cet email est deja utilisé");
-        } else if (res.status === 424) {
-          setFormMessage("Une erreur s'est produite veuillez réessayer");
-        } else {
-          setFormMessage("");
-          fetch("http://localhost:3000/auth/signin", {
+
+    const availableEmail = body.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+
+    if (body.email !== "" && availableEmail !== null) {
+      if (body.password !== "") {
+        try {
+          fetch("http://localhost:3000/user/new", {
             method: "POST",
             body: JSON.stringify(body),
             headers: { "Content-type": "application/json" },
-          }).then((res) => {console.log(res)});
-          props.history.push("/");
+          })
+            .then((res) => {
+              const statusCode = res.status;
+              const message = res.json();
+              return Promise.all([statusCode, message]);
+            })
+            .then(([statusCode, message]) => {
+              if (statusCode !== 201) {
+                setFormMessage(message);
+              } else {
+                setFormMessage("");
+                fetch("http://localhost:3000/auth/signin", {
+                  method: "POST",
+                  body: JSON.stringify(body),
+                  headers: { "Content-type": "application/json" },
+                })
+                  .then((res) => {
+                    return Promise.resolve(res.json());
+                  })
+                  .then((token) => {
+                    props.login(token);
+                    props.history.push("/");
+                  });
+              }
+            });
+        } catch (error) {
+          if (error) {
+            e.preventDefault();
+            setFormMessage("Une erreur s'est produite veuillez réessayer");
+          }
         }
-      });
-    } catch (error) {
-      if (error) {
-        e.preventDefault();
-        setFormMessage("Une erreur s'est produite veuillez réessayer");
+      } else {
+        setFormMessage("Vous devez choisir un mot de passe");
       }
+    } else {
+      setFormMessage("Format d'email invalide");
     }
   };
 
