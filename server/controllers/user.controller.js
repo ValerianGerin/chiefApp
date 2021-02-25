@@ -13,7 +13,7 @@ exports.newUser = async (req, res) => {
 
     if (emailAlreadyExist) {
       //If it already exist can't create the user
-      res.status(409).end();
+      res.status(409).json("Cet email existe deja");
     } else {
       try {
         //Calling statics method on the model to hash the password
@@ -27,14 +27,14 @@ exports.newUser = async (req, res) => {
             password: hashedPassword,
           },
         });
-        res.status(201).end();
+        res.status(201).json("Utilisateur crée avec succès");
         newUser.save();
       } catch (error) {
         res.status(424).end();
-
         throw error;
       }
     }
+  } else {
+    res.status(422).json("Email invalide");
   }
-  res.status(500).end();
 };
