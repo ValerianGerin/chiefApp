@@ -14,7 +14,8 @@ exports.login = async (req, res, next) => {
 
       if (match) {
         const token = createToken(user._id);
-        res.send(token);
+        res.json(token)
+
       } else {
         res.status(401).json("Veuillez verifier le mot de passe");
      
