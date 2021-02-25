@@ -83,6 +83,7 @@
     }
   }
  h2{
-   font-size: 2vw;
+   padding: 2%;
+   font-size: clamp(0.8rem, 1.5vw, 1.8rem)
  }
 }
