@@ -21,13 +21,20 @@ const App = () => {
   const [loggedStatus, setLoggedStatus] = useState({
     isLogged: false,
     token: null,
-    user: null,
+    userId: null,
   });
+
+  console.log(loggedStatus.userId)
 
   const login = (token) => {
     localStorage.setItem("authorization", token);
-    const userFromToken = JSON.parse(window.atob(token.split(".")[1]));
-    setLoggedStatus({...loggedStatus,  isLogged: true, token: token, user: userFromToken });
+    const userIdFromToken = JSON.parse(window.atob(token.split(".")[1])).payload;
+    setLoggedStatus({
+      ...loggedStatus,
+      isLogged: true,
+      token: token,
+      userId: userIdFromToken,
+    });
   };
 
   const logout = () => {
@@ -54,7 +61,11 @@ const App = () => {
               ></Route>
               <Route
                 path="/register"
-                render={(props) => <Register {...props} login={login}/>}
+                render={(props) => <Register {...props} login={login} />}
+              ></Route>
+              <Route
+                path="/login"
+                render={(props) => <Login {...props} login={login} />}
               ></Route>
             </main>
           </>
