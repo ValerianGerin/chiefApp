@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { MdVisibility } from "react-icons/md";
+import { GiReturnArrow } from "react-icons/gi";
 
 import style from "./Register.module.scss";
 
@@ -75,7 +76,7 @@ const Register = (props) => {
     setDisplay(!display);
   };
   return (
-    <div className={style.container}>
+    <div className={style.registerContainer}>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Pseudo</label>
@@ -109,6 +110,10 @@ const Register = (props) => {
           <button>Reinitialiser</button>
         </div>
         <h2>{formMessage}</h2>
+        <Link to="/">
+          <GiReturnArrow/>
+          <p>Revenir a l'accueil</p>
+        </Link>
       </form>
     </div>
   );
