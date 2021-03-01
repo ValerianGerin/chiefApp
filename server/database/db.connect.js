@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost:27017/cookingApp", {
+  .connect("  mongodb+srv://admin:quasar001@cluster0.7nlao.mongodb.net/cookingApp?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -9,3 +9,5 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+
+
