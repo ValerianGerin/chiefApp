@@ -19,6 +19,36 @@ const Register = (props) => {
     setForm({ ...form, [name]: value });
   };
 
+  const registerAndLogUser = async (body) => {
+    const register = await fetch("http://localhost:3000/user/new", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-type": "application/json" },
+    });
+
+    const registerResponseMessage = register.json();
+    const registerResponseStatus = register.status;
+    if (registerResponseStatus !== 201) {
+      setFormMessage(registerResponseMessage);
+    } else {
+      const signin = await fetch("http://localhost:3000/auth/signin", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-type": "application/json" },
+      });
+      const signinResponseMessage = await signin.json();
+      const signinResponseStatus = await signin.status;
+
+      if (signinResponseStatus !== 200) {
+        setFormMessage(signinResponseMessage);
+      } else {
+        setFormMessage("");
+        props.login(signinResponseMessage);
+        props.history.push("/");
+      }
+    }
+  };
+
   const handleSubmit = (e) => {
     const body = { ...form };
 
@@ -29,35 +59,7 @@ const Register = (props) => {
     if (body.email !== "" && availableEmail !== null) {
       if (body.password !== "") {
         try {
-          fetch("http://localhost:3000/user/new", {
-            method: "POST",
-            body: JSON.stringify(body),
-            headers: { "Content-type": "application/json" },
-          })
-            .then((res) => {
-              const statusCode = res.status;
-              const message = res.json();
-              return Promise.all([statusCode, message]);
-            })
-            .then(([statusCode, message]) => {
-              if (statusCode !== 201) {
-                setFormMessage(message);
-              } else {
-                setFormMessage("");
-                fetch("http://localhost:3000/auth/signin", {
-                  method: "POST",
-                  body: JSON.stringify(body),
-                  headers: { "Content-type": "application/json" },
-                })
-                  .then((res) => {
-                    return Promise.resolve(res.json());
-                  })
-                  .then((token) => {
-                    props.login(token);
-                    props.history.push("/");
-                  });
-              }
-            });
+          registerAndLogUser(body);
         } catch (error) {
           if (error) {
             e.preventDefault();
@@ -111,7 +113,7 @@ const Register = (props) => {
         </div>
         <h2>{formMessage}</h2>
         <Link to="/">
-          <GiReturnArrow/>
+          <GiReturnArrow />
           <p>Revenir a l'accueil</p>
         </Link>
       </form>

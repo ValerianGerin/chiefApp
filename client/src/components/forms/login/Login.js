@@ -19,6 +19,24 @@ const Login = (props) => {
     setForm({ ...form, [name]: value });
   };
 
+  const LogUser = async (body) => {
+    const signin = await fetch("http://localhost:3000/auth/signin", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-type": "application/json" },
+    });
+    const signinResponseMessage = await signin.json();
+    const signinResponseStatus = await signin.status;
+
+    if (signinResponseStatus !== 200) {
+      setFormMessage(signinResponseMessage);
+    } else {
+      setFormMessage("");
+      props.login(signinResponseMessage);
+      props.history.push("/");
+    }
+  };
+
   const handleSubmit = (e) => {
     const body = { ...form };
 
@@ -29,26 +47,7 @@ const Login = (props) => {
     if (body.email !== "" && availableEmail !== null) {
       if (body.password !== "") {
         try {
-          fetch("http://localhost:3000/auth/signin", {
-            method: "POST",
-            body: JSON.stringify(body),
-            headers: { "Content-type": "application/json" },
-          })
-            .then((res) => {
-              const statusCode = res.status;
-              const message = res.json();
-              return Promise.all([statusCode, message]);
-            })
-            .then(([statusCode, message]) => {
-              console.log(statusCode);
-              if (statusCode !== 200) {
-                setFormMessage(message);
-              } else {
-                setFormMessage("");
-                props.login(message);
-                props.history.push("/");
-              }
-            });
+          LogUser(body);
         } catch (error) {
           if (error) {
             e.preventDefault();
