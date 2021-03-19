@@ -10,3 +10,5 @@ export { default as TermsOfServices } from "./footer/footer-pages/terms-of-servi
 export { default as Login } from "./forms/login/Login";
 export { default as Register } from "./forms/register/Register";
 export { default as AddRecipe } from "./forms/add-recipe/AddRecipe";
+
+export {default as UserProfil } from "./user-profil/UserProfil";
