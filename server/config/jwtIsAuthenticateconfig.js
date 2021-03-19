@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const { secret } = require("./jwtSecret.config");
 const { findUserPerID } = require("../queries/user.query");
+const secret = process.env.secret;
 
 /*Function used on protected routes too check if token and token is valid and create a 
 user key on req that container the user info since the decodedToken contain the userID*/
