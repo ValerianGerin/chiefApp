@@ -1,5 +1,15 @@
 const user = require("../models/user.model");
-const { findUserPerEmail } = require("../queries/user.query");
+const { findUserPerEmail, findUserPerID } = require("../queries/user.query");
+
+exports.findUserById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await findUserPerID(id);
+    res.json(user);
+  } catch (error) {
+    throw error;
+  }
+};
 
 exports.newUser = async (req, res) => {
   const { name, email, password } = req.body;
