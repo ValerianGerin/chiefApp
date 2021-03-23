@@ -7,7 +7,7 @@ mongoose
   })
   .then(() => console.log("connexion db ok"))
   .catch((error) => {
-    console.log(error);
+    throw error
   });
 
 
