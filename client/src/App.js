@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import {
@@ -11,6 +11,7 @@ import {
   Register,
   Login,
   AddRecipe,
+  UserProfil,
 } from "./components";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -21,25 +22,39 @@ const App = () => {
   const [loggedStatus, setLoggedStatus] = useState({
     isLogged: false,
     token: null,
-    userId: null,
-  });
+});
 
-  console.log(loggedStatus.userId)
+
+  const [userInfos, setUserInfos] = useState();
+  console.log(userInfos);
 
   const login = (token) => {
     localStorage.setItem("authorization", token);
-    const userIdFromToken = JSON.parse(window.atob(token.split(".")[1])).payload;
     setLoggedStatus({
       ...loggedStatus,
       isLogged: true,
       token: token,
-      userId: userIdFromToken,
+ 
     });
   };
 
   const logout = () => {
     localStorage.removeItem("authorization");
-    setLoggedStatus({ isLogged: false, token: null });
+    setLoggedStatus({ isLogged: false, token: null, userId: null });
+  };
+
+
+  
+
+
+  const getUserInfos = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/user/${id}`);
+      const jsonResponse = await response.json();
+      setUserInfos(jsonResponse);
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
@@ -61,11 +76,17 @@ const App = () => {
               ></Route>
               <Route
                 path="/register"
-                render={(props) => <Register {...props} login={login} />}
+                render={(props) => <Register {...props} login={login} getUserInfos={getUserInfos}/>}
               ></Route>
               <Route
                 path="/login"
-                render={(props) => <Login {...props} login={login} />}
+                render={(props) => (
+                  <Login {...props} login={login} getUserInfos={getUserInfos}  />
+                )}
+              ></Route>
+              <Route
+                path="/profil"
+                render={(props) => <UserProfil {...props} {...userInfos}  />}
               ></Route>
             </main>
           </>

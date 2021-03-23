@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { extractUserIdFromToken } from "../../../utils/Func.utils";
 import { Link } from "react-router-dom";
 
 import { AiFillEyeInvisible } from "react-icons/ai";
@@ -44,6 +45,7 @@ const Register = (props) => {
       } else {
         setFormMessage("");
         props.login(signinResponseMessage);
+        props.getUserInfos(extractUserIdFromToken(signinResponseMessage))
         props.history.push("/");
       }
     }

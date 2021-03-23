@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { extractUserIdFromToken } from "../../../utils/Func.utils";
 import { Link } from "react-router-dom";
 
 import { AiFillEyeInvisible } from "react-icons/ai";
@@ -20,20 +21,25 @@ const Login = (props) => {
   };
 
   const LogUser = async (body) => {
-    const signin = await fetch("http://localhost:3000/auth/signin", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: { "Content-type": "application/json" },
-    });
-    const signinResponseMessage = await signin.json();
-    const signinResponseStatus = await signin.status;
+    try {
+      const signin = await fetch("http://localhost:3000/auth/signin", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-type": "application/json" },
+      });
+      const signinResponseMessage = await signin.json();
+      const signinResponseStatus = await signin.status;
 
-    if (signinResponseStatus !== 200) {
-      setFormMessage(signinResponseMessage);
-    } else {
-      setFormMessage("");
-      props.login(signinResponseMessage);
-      props.history.push("/");
+      if (signinResponseStatus !== 200) {
+        setFormMessage(signinResponseMessage);
+      } else {
+        setFormMessage("");
+        props.login(signinResponseMessage);
+        props.getUserInfos(extractUserIdFromToken(signinResponseMessage))
+        props.history.push("/");
+      }
+    } catch (error) {
+      setFormMessage("Une erreur s'est produite veuillez réessayer");
     }
   };
 
@@ -93,7 +99,7 @@ const Login = (props) => {
             )}
           </div>
           <div>
-            <button>Inscription</button>
+            <button>Connexion</button>
             <button>Reinitialiser</button>
           </div>
           <h2>{formMessage}</h2>
