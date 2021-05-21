@@ -16,13 +16,10 @@ USERSCHEMA.statics.hashPassword = async (password) => {
   return hashedPassword;
 };
 
-USERSCHEMA.methods.comparePassword = function(password){
-  return bcrypt.compare(password, this.logInfos.password)
-}
-
+USERSCHEMA.methods.comparePassword = function (password) {
+  return bcrypt.compare(password, this.logInfos.password);
+};
 
 const user = mongoose.model("users", USERSCHEMA);
 
-
-
-module.exports = user
+module.exports = user;

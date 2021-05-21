@@ -14,19 +14,15 @@ exports.login = async (req, res, next) => {
 
       if (match) {
         const token = createToken(user._id);
-        res.json(token)
-
+        res.json(token);
       } else {
         res.status(401).json("Veuillez verifier le mot de passe");
-     
       }
     } else {
       res.status(401).json("Veuillez verifier l'email");
-     
     }
   } catch (e) {
-    res.status(500).json("Une erreur s'est produite veuillez réessayer")
+    res.status(500).json("Une erreur s'est produite veuillez réessayer");
     throw e;
-    
   }
 };
