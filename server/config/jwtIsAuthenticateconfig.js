@@ -4,7 +4,7 @@ const secret = process.env.secret;
 
 /*Function used on protected routes too check if token and token is valid and create a 
 user key on req that container the user info since the decodedToken contain the userID*/
-exports.isAuthenticate = async (req, res, next) => {
+exports.isAuthenticated = async (req, res, next) => {
   const token = req.headers.authorization;
 
   if (token) {
@@ -16,15 +16,14 @@ exports.isAuthenticate = async (req, res, next) => {
         req.user = user;
         next();
       } else {
-        res.status(404);
-        next();
+        res.status(404).end();
       }
     } catch (error) {
-      res.status(401);
-      res.end();
+      res.status(401).end();
+
       throw error;
     }
   } else {
-    next();
+    res.status(404).end();
   }
 };

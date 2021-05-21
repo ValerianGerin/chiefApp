@@ -15,9 +15,9 @@ exports.newUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   //First checking if the email is provided from the form
-  const availableEmail = email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+  const isValidEmail = email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
-  if (availableEmail !== null) {
+  if (isValidEmail !== null) {
     //Then checking if the email already exist since it's unique
     const emailAlreadyExist = await findUserPerEmail(email);
 
