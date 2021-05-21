@@ -28,8 +28,8 @@ const Navbar = () => {
           <>
             <li>
               <Link to="/profil">
-              <VscAccount></VscAccount>
-              <p>Profil</p>
+                <VscAccount></VscAccount>
+                <p>Profil</p>
               </Link>
             </li>
             <li>

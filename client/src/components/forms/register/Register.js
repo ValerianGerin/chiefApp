@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { extractUserIdFromToken } from "../../../utils/Func.utils";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
 
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { MdVisibility } from "react-icons/md";
@@ -9,6 +10,8 @@ import { GiReturnArrow } from "react-icons/gi";
 import style from "./Register.module.scss";
 
 const Register = (props) => {
+  const { login, getUserInfos } = useContext(AuthContext);
+
   const initialStateForm = { name: "", email: "", password: "" };
 
   const [form, setForm] = useState(initialStateForm);
@@ -44,8 +47,8 @@ const Register = (props) => {
         setFormMessage(signinResponseMessage);
       } else {
         setFormMessage("");
-        props.login(signinResponseMessage);
-        props.getUserInfos(extractUserIdFromToken(signinResponseMessage))
+        login(signinResponseMessage);
+        // getUserInfos(extractUserIdFromToken(signinResponseMessage));
         props.history.push("/");
       }
     }

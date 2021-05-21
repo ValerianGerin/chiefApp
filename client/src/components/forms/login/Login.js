@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { extractUserIdFromToken } from "../../../utils/Func.utils";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
 
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { MdVisibility } from "react-icons/md";
@@ -9,6 +10,8 @@ import { GiReturnArrow } from "react-icons/gi";
 import style from "./Login.module.scss";
 
 const Login = (props) => {
+  const { login, getUserInfos } = useContext(AuthContext);
+
   const initialStateForm = { email: "", password: "" };
 
   const [form, setForm] = useState(initialStateForm);
@@ -20,7 +23,6 @@ const Login = (props) => {
     setForm({ ...form, [name]: value });
   };
 
-  
   const LogUser = async (body) => {
     try {
       const signin = await fetch("http://localhost:3000/auth/signin", {
@@ -35,8 +37,8 @@ const Login = (props) => {
         setFormMessage(signinResponseMessage);
       } else {
         setFormMessage("");
-        props.login(signinResponseMessage);
-        props.getUserInfos(extractUserIdFromToken(signinResponseMessage))
+        login(signinResponseMessage);
+        // getUserInfos(extractUserIdFromToken(signinResponseMessage));
         props.history.push("/");
       }
     } catch (error) {
@@ -51,7 +53,6 @@ const Login = (props) => {
     e.preventDefault();
 
     const availableEmail = body.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
-
 
     if (body.email !== "" && availableEmail !== null) {
       if (body.password !== "") {
@@ -71,13 +72,9 @@ const Login = (props) => {
     }
   };
 
-
-
   const displayPassword = () => {
     setDisplay(!display);
   };
-
-
 
   return (
     <>
