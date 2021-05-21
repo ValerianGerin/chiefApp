@@ -1,4 +1,4 @@
-const { isAuthenticated } = require("../config/jwtIsAuthenticateconfig");
+const { isAuthenticated } = require("../config/jwtIsAuthenticated.config");
 const router = require("express").Router();
 const userRouter = require("./user.routes");
 const authRouter = require("./auth.routes");
