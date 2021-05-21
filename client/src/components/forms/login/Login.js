@@ -20,6 +20,7 @@ const Login = (props) => {
     setForm({ ...form, [name]: value });
   };
 
+  
   const LogUser = async (body) => {
     try {
       const signin = await fetch("http://localhost:3000/auth/signin", {
@@ -43,12 +44,14 @@ const Login = (props) => {
     }
   };
 
+  //Form submit
   const handleSubmit = (e) => {
     const body = { ...form };
 
     e.preventDefault();
 
     const availableEmail = body.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+
 
     if (body.email !== "" && availableEmail !== null) {
       if (body.password !== "") {
@@ -68,9 +71,14 @@ const Login = (props) => {
     }
   };
 
+
+
   const displayPassword = () => {
     setDisplay(!display);
   };
+
+
+
   return (
     <>
       <div className={style.loginContainer}>

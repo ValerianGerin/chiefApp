@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import {
@@ -10,7 +10,6 @@ import {
   LegalNotice,
   Register,
   Login,
-  AddRecipe,
   UserProfil,
 } from "./components";
 
@@ -22,19 +21,15 @@ const App = () => {
   const [loggedStatus, setLoggedStatus] = useState({
     isLogged: false,
     token: null,
-});
-
+  });
 
   const [userInfos, setUserInfos] = useState();
-  console.log(userInfos);
 
   const login = (token) => {
     localStorage.setItem("authorization", token);
     setLoggedStatus({
-      ...loggedStatus,
       isLogged: true,
       token: token,
- 
     });
   };
 
@@ -42,10 +37,6 @@ const App = () => {
     localStorage.removeItem("authorization");
     setLoggedStatus({ isLogged: false, token: null, userId: null });
   };
-
-
-  
-
 
   const getUserInfos = async (id) => {
     try {
@@ -76,17 +67,23 @@ const App = () => {
               ></Route>
               <Route
                 path="/register"
-                render={(props) => <Register {...props} login={login} getUserInfos={getUserInfos}/>}
+                render={(props) => (
+                  <Register
+                    {...props}
+                    login={login}
+                    getUserInfos={getUserInfos}
+                  />
+                )}
               ></Route>
               <Route
                 path="/login"
                 render={(props) => (
-                  <Login {...props} login={login} getUserInfos={getUserInfos}  />
+                  <Login {...props} login={login} getUserInfos={getUserInfos} />
                 )}
               ></Route>
               <Route
                 path="/profil"
-                render={(props) => <UserProfil {...props} {...userInfos}  />}
+                render={(props) => <UserProfil {...props} {...userInfos} />}
               ></Route>
             </main>
           </>
