@@ -41,7 +41,7 @@ const Register = (props) => {
         headers: { "Content-type": "application/json" },
       });
       const signinResponseMessage = await signin.json();
-      const signinResponseStatus = await signin.status;
+      const signinResponseStatus = signin.status;
 
       if (signinResponseStatus !== 200) {
         setFormMessage(signinResponseMessage);
