@@ -12,12 +12,20 @@ const USERSCHEMA = schema({
 });
 
 USERSCHEMA.statics.hashPassword = async (password) => {
-  const hashedPassword = bcrypt.hash(password, 10);
-  return hashedPassword;
+  try {
+    const hashedPassword = bcrypt.hash(password, 10);
+    return hashedPassword;
+  } catch (error) {
+    throw error;
+  }
 };
 
 USERSCHEMA.methods.comparePassword = function (password) {
-  return bcrypt.compare(password, this.logInfos.password);
+  try {
+    return bcrypt.compare(password, this.logInfos.password);
+  } catch (error) {
+    throw error;
+  }
 };
 
 const user = mongoose.model("users", USERSCHEMA);
